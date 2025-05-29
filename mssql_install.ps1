@@ -1,4 +1,4 @@
-﻿#Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 
 <#
 .SYNOPSIS
@@ -297,12 +297,13 @@ if ($EnableProtocols) {
 
 Dismount-DiskImage $IsoPath
 
+
 if($InstallSSMS) {
 
     Write-Host "Downloading: $ssmsPath"
 
         $ssmsIsoName = $ssmsPath -split '/' | Select-Object -Last 1
-        $ssmsExeName = $ssmsIsoName + ".exe"
+        $ssmsExeName = $ssmsIsoName + ".exe" 
         $ssmsSavePath = Join-Path $saveDir $ssmsExeName
 
 
@@ -320,6 +321,5 @@ if($InstallSSMS) {
 }
 
 "`nInstallation length: {0:f1} minutes" -f ((Get-Date) - $start).TotalMinutes
-
-Stop-Transcript
 trap { Stop-Transcript; if ($IsoPath) { Dismount-DiskImage $IsoPath -ErrorAction 0 } }
+Stop-Transcript
